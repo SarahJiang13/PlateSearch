@@ -1,0 +1,38 @@
+<html>
+        <head>
+        <h1>Input Number</h1>
+        <form action="{{ url_for('handle_data') }}" method="post">
+            <input type="text" name="Number">
+            <input type="submit">
+        </form>
+        
+            
+      
+        <p id = "res">Enter Number and Will Be Multiplied by 5</p> <input type="text" id="test" value=""></p>     
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
+        <script>
+        $(document).ready(function(){
+          $("button").click(function(){
+            $.post("http://127.0.0.1:5000/number", {}, function(data, status){
+              //alert("Data: " + data + "\nStatus: " + status);
+              console.log(data)
+              $("#test").replaceWith(data)
+            });
+          });
+        });
+        </script>
+        </head>
+        <td>
+            <div class="form-group">
+                <input type="number" id="amount" name="amount"  value="{{ i.order_quantity }}">
+                <input type="hidden" name="item_id" value="{{ i.item_id }}"/>
+            </div>
+        </td>
+        
+        <body>
+        
+        <button onclick="type"*5>Value</button>
+         
+        </body>
+

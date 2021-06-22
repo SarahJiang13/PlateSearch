@@ -1,0 +1,88 @@
+<html>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+<h1>Button THingy</h1>
+<button onclick="someFunc()">BUTTON</button>  
+<script>
+function someFunc() {
+    document.getElementById("demo2").innerHTML = Date();
+    console.log("click");
+    document.getElementById("demo").innerHTML = "Hello World";
+    
+}
+$(document).ready(function(){
+  $("p").click(function(){
+    $(this).hide('fast');
+  });
+});
+$
+</script>
+</body>
+<body>
+<p id='demo2'></p>
+<p id="demo"></p>
+</body>
+</html>
+
+<html>
+    <head>
+    <h1>Get JQuery</h1>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+      $("#btn1").click(function(){
+        alert("Text: " + $("#test").text());
+      });
+      $("#btn2").click(function(){
+        alert("HTML: " + $("#test").html());
+      });
+    });
+    </script>
+    </head>
+    <body>
+    
+    <p id="test">This is some <b>bold</b> text in a paragraph.</p>
+    
+    <button id="btn1">Show Text</button>
+    <button id="btn2">Show HTML</button>
+    
+    </body>
+    </html>
+
+
+
+    <html>
+        <head>
+        <h1>Get function</h1>
+        <p id = "res">Press button</p>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+        $(document).ready(function(){
+          $("button").click(function(){
+            $.get("http://127.0.0.1:5000/button", {}, function(data, status){
+              //alert("Data: " + data + "\nStatus: " + status);
+              console.log(data)
+              $("#res").replaceWith(data)
+            });
+          });
+        });
+        </script>
+        </head>
+        <body>
+        
+        <button>The button Button</button>
+        
+        </body>
+
+
+
+
+
+
+
+        
+
+
+
+
+        <p id = "res">Enter Number and Will Be Multiplied by 5</p> <input type="text" id="test" value=""></p>
