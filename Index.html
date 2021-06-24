@@ -19,7 +19,7 @@
 <div class="container mt-3">
 <form class="form-inline" action="/action_page.php">
     <input type="text" class="form-control col-lg-8" id="PlateSearch" placeholder="Search">
-      <button class="btn btn-primary" type="button" onclick="loadDoc()">Search</button>
+      <button class="btn btn-primary" type="button" id="searchbutton">Search</button>
 
       <p id="demo"></p>
        
@@ -40,6 +40,19 @@
         xhttp.send(plateToSearch);
         console.log(plateToSearch)
       }
+
+      $("#searchbutton").click(function(){
+        plate = document.getElementById("PlateSearch").value;
+        $.post("192.168.1.67:5001/plate",
+        {
+          "plate": plate,
+        },
+        function(data, status){
+          console.log("Data: " + data + "\nStatus: " + status);
+        });
+      })
+
+
       </script>
   </form>
   </form>
