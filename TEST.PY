@@ -58,6 +58,8 @@ def database():
     content = get_file('Index.html')
     return Response(returnJson, mimetype="text/json")
     
+        #if car == 4:
+            #print(f'\t{row[1]}')
 
 
 if __name__ == '__main__':
