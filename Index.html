@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Plate Search</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="custom.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h1>Plate Search</h1>
+  <p>Welcome to plate search, please enter the plate number below</p> 
+</div>
+<div class="container mt-3">
+<form class="form-inline" action="/action_page.php">
+    <input type="text" class="form-control col-lg-8" placeholder="Search">
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+  </div>
+
+  <div class="container mt-3">
+    <h2>Or upload an image</h2>
+    <p>PLease upload and image of the plate number</p>
+    <form action="/action_page.php">
+      <p>Plate img:</p>
+      <div class="custom-file mb-3">
+        <input type="file" class="custom-file-input" id="customFile" name="filename">
+        <label class="custom-file-label" for="customFile">Choose file</label>
+      </div>
+      
+      <p>Plate img:</p>
+      <input type="file" id="myFile" name="filename2">
+
+      <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+  
+  <script>
+  // Add the following code if you want the name of the file appear on select //
+  $(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+  </script>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>Plate</h1>
+  <p>The following shows all details on the licence plate searched. </p> 
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <a class="navbar-brand" href="Index.html">Search another plate</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"></button>
+    <span class="navbar-toggler-icon"></span>
+</nav>
+
+<script>
+    $.ajax({
+        type: "GET",
+        url: "rnp_counts.csv",
+        success: function (data) {
+            $('body').append(arrayToTable(Papa.parse(data).data));
+        }
+    });
+
+    function arrayToTable(tableData) {
+        var table = $('<table></table>');
+        $(tableData).each(function (i, rowData) {
+            var row = $('<tr></tr>');
+            $(rowData).each(function (j, cellData) {
+                row.append($('<td>'+cellData+'</td>'));
+            });
+            table.append(row);
+        });
+        return table;
+    }
+</script>  
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <p>Plate search</p>
+</div>
+
+</body>
+</html>

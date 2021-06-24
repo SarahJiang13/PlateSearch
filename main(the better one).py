@@ -1,21 +1,10 @@
 import os.path
-import csv 
+
 from flask import Flask, Response
 
 
 app = Flask(__name__)
 app.config.from_object(__name__)
-with open('rnp_counts.csv') as csvfile:
-    reader = csv.reader(csvfile, delimiter=',')
-    line_count = 0
-    for row in reader:
-        if line_count == 0:
-            print(f'Car plates:  {",". join(row)}')
-            line_count += 1
-        else:
-            print(f'\t{row[0]}     {row[1]}')
-            line_count += 1
-    print(f'Showed {line_count} lines')
     
 def root_dir(): 
     return os.path.abspath(os.path.dirname(__file__))
@@ -33,8 +22,8 @@ def get_file(filename):
 @app.route('/', methods=['GET'])
 def metrics():  
     
-    content = get_file('webstie.html')
-    return Response(csvfile, mimetype="text/html")
+    content = get_file('Index.html')
+    return Response(content, mimetype="text/html")
 
 
 @app.route('/', defaults={'path': ''})
