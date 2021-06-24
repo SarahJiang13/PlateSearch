@@ -24,7 +24,7 @@ def get_file(filename):
 
 @app.route('/')
 def titlePage():
-    content = get_file('website.html')
+    content = get_file('index.html')
     return (content)
 
 @app.route('/plate', methods= (['POST']))
@@ -46,8 +46,9 @@ def database():
                 print(f'\t{row[1]}     {row[15]}  {row[9]}')
             line_count += 1
     # Create a dictionary
+    dog = "dog"
     jsonDict = {
-        "Plate": 'EXTRACTEDPLATE',
+        "Plate": dog,
         "Recievetimeutc": 'date',
         "State": "NSW",
     }

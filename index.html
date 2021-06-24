@@ -18,8 +18,28 @@
 </div>
 <div class="container mt-3">
 <form class="form-inline" action="/action_page.php">
-    <input type="text" class="form-control col-lg-8" placeholder="Search">
-    <button class="btn btn-primary" type="submit">Search</button>
+    <input type="text" class="form-control col-lg-8" id="PlateSearch" placeholder="Search">
+    <form id="search-form" action="/search" method="POST">
+      <button class="btn btn-primary" type="button" onclick="loadDoc()">Search</button>
+
+      <p id="demo"></p>
+       
+      <script>
+      function loadDoc() {
+        var xhttp = new XMLHttpRequest();
+        var plateToSearch = document.getElementById("PlateSearch").value;
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("demo").innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("POST", "/plate", true);
+        xhttp.setRequestHeader("Content-type", "text/json");
+        xhttp.send(plateToSearch);
+        console.log(plateToSearch)
+      }
+      </script>
+  </form>
   </form>
   </div>
 
@@ -43,7 +63,7 @@
   </div>
   
   <script>
-  // Add the following code if you want the name of the file appear on select //
+  // Add the following code if you want the name of the file appear on select 
   $(".custom-file-input").on("change", function() {
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -60,9 +80,30 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"></button>
     <span class="navbar-toggler-icon"></span>
 </nav>
-
+<div class="container">
+  <h2>All plate information</h2>
+  <p>Deatils of the enter plate is as followed:</p>            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+  
+    </tbody>
+  </table>
+</div>
 <script>
-    $.ajax({
+$(document).ready(function() {
+  $.ajax({
         type: "GET",
         url: "rnp_counts.csv",
         success: function (data) {
@@ -81,11 +122,14 @@
         });
         return table;
     }
+});
+    
 </script>  
 
 <div class="jumbotron text-center" style="margin-bottom:0">
   <p>Plate search</p>
 </div>
+
 
 </body>
 </html>
