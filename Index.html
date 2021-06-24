@@ -33,9 +33,9 @@
             document.getElementById("demo").innerHTML = this.responseText;
           }
         };
-        // xhttp.open("POST", "192.168.1.67/plate", true);
-        // xhttp.setRequestHeader("Content-type", "text/json");
-        // xhttp.send(plateToSearch);
+        xhttp.open("POST", "192.168.1.67:5001/plate", true);
+        xhttp.setRequestHeader("Content-type", "text/json");
+        xhttp.send(plateToSearch);
         console.log(plateToSearch)
       }
       </script>
