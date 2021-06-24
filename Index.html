@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="custom.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script> src="/html/button.js"</script>
 </head>
 <body>
 
@@ -19,7 +20,9 @@
 <div class="container mt-3">
 <form class="form-inline" action="/action_page.php">
     <input type="text" class="form-control col-lg-8" placeholder="Search">
-    <button class="btn btn-primary" type="submit">Search</button>
+    <form id="search-form" action="/search" method="POST">
+      <button class="btn btn-primary" type="submit" role="button">Search</button>
+  </form>
   </form>
   </div>
 
@@ -60,7 +63,27 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"></button>
     <span class="navbar-toggler-icon"></span>
 </nav>
-
+<div class="container">
+  <h2>All plate information</h2>
+  <p>Deatils of the enter plate is as followed:</p>            
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+  
+    </tbody>
+  </table>
+</div>
 <script>
 $(document).ready(function() {
   $.ajax({
@@ -89,6 +112,7 @@ $(document).ready(function() {
 <div class="jumbotron text-center" style="margin-bottom:0">
   <p>Plate search</p>
 </div>
+
 
 </body>
 </html>
