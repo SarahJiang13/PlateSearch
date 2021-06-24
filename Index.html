@@ -24,31 +24,23 @@
       <p id="demo"></p>
        
       <script>
-      function loadDoc() {
-        var xhttp = new XMLHttpRequest();
-        var plateToSearch = document.getElementById("PlateSearch").value;
-        xhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("demo").innerHTML = this.responseText;
-          }
-        }; 
-        xhttp.open("POST", "192.168.1.67:5001/plate", true);
-        xhttp.setRequestHeader("Content-type", "text/json");
-        plate = {
-          "plate": plateToSearch,
-        };
-        xhttp.send(plateToSearch);
-        console.log(plateToSearch)
-      }
-
+      
       $("#searchbutton").click(function(){
         plate = document.getElementById("PlateSearch").value;
-        $.post("192.168.1.67:5001/plate",
-        {
-          "plate": plate,
-        },
-        function(data, status){
-          console.log("Data: " + data + "\nStatus: " + status);
+        
+        var setting = {
+          "url": "192.168.1.67:5001/plate",
+          "method":"POST",
+          "headers":{
+            "Content-Type":"aplication/json"
+          },
+          data: JSON.stringify({
+            "plate": plate,
+          }),
+        };
+        
+        $.ajax(setting).done(function(response){
+          console.log(response);
         });
       })
 
