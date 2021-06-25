@@ -45,10 +45,10 @@
         sucess = function(data) {
           $('#platetable').show();
           for (var i = 0; i < len; i++) {
-   var Plate = data[i].Plate;
-   var Recievetimeutc  = data[i].Recievetimeutc;
-   var State = data[i].State;
-   $('#platetable tbody').append('<tr><td>'+Plate+'</td><td>'+Recievetimeutc+'</td><td>'+State+'</td></tr>')
+   var plate = data[i].plate;
+   var date  = data[i].date;
+   var state = data[i].state;
+   $('#platetable tbody').append('<tr><td>'+plate+'</td><td>'+date+'</td><td>'+state+'</td></tr>')
 }
         }
         
