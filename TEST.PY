@@ -7,6 +7,7 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 csvfile = open('rnp_counts.csv')
+
 carPlate = range(1, 4)
 
 def root_dir(): 
@@ -32,60 +33,57 @@ def searchForState(row):
     # And converts it into a State or Territoy of Australia, i.e.
     # NSW, QLD, ACT, VIC etc.
     # In this CSV File, a state is true if it has a 1 valve
-    # row[9], row[10], row[11], row[12], row[13], row[14] are all the states
-    if row[4] == 1:
+    # row[9], row[10], row[11], row[12], row[16], row[14] are all the states
+    if row[4] == '1':
         return "VIC"
-    if row[9] == 1:
+    elif row[9] == '1':
         return "NSW"
-    if row[11] == 1:
+    elif row[10] == '1':
+        return 'QLD'
+    elif row[11] == '1':
         return "TAS"
+    elif row[12] == '1':
+        return 'ACT'
+    elif row[16] == '1':
+        return 'WA'
     else:
         return "No State Found"
 
 @app.route('/plate', methods= (['POST']))
 def database():
+    # The request coming in from the server
     sarahsRequest = request.get_data()
+    # Decoding the request
     jsonrequest = sarahsRequest.decode('utf8').replace("'",'"')
     jsonrequest = json.loads(jsonrequest)
+    # Finding the sent plate
     plate = jsonrequest["plate"]
-    displayStr = str()
+    # Explict set of jsonDict
+    jsonDict = None
+    # Reader set
     reader = csv.reader(csvfile, delimiter=',')
-    line_count = 0
-    
-    date = 'date'
-    state = 'state'
-    jsonDict = {
-        "Plate": plate,
-        "Recievetimeutc": date,
-        "State": state,
-    }
-    
-
+    # Go after headers
+    next(reader)
     for row in reader:
-        if line_count == 0:
-
-            print(str(jsonrequest))
-            line_count += 1
-        else:
-            state == row[9], row[10], row[11], row[12], row[13], row[14]
-            displayStr = displayStr + (f'{row[1]}  {row[2]}   {row[3][0]}    {row[15]}\r')
-            if row[1] == str(plate):
-                print("Plate is: " + plate)
-                print('Recievetimeutic:   '+ str(row[15]))
-                print('State is: ' + state)
-                
-            line_count += 1
-    # Create a dictionary
-   
-    returnJson = json.dumps(jsonDict)
-    # 
-    # print(f'Showed {line_count} lines')
-    # dictionary = dict(reader)
-    content = get_file('index.html')
-    return Response(returnJson, mimetype="text/json")
-    
-        #if car == 4:
-            #print(f'\t{row[1]}')
+        if row[1] == str(plate):
+            date = str(row[15])
+            state = searchForState(row)
+            print("Plate is: " + plate)
+            print('Recievetimeutic:   '+ str(row[15]))
+            print('State is: ' + searchForState(row))
+            jsonDict = {
+                "Plate": plate,
+                "Recievetimeutc": date,
+                "State": state,
+            }
+    if jsonDict is not None:
+        returnJson = json.dumps(jsonDict)
+        content = get_file('index.html')
+        return Response(returnJson, mimetype="text/json")
+    else:
+        return Response(json.dumps({"Error": "No Plate Found"}), mimetype="text/json")
+        
+        
 
 
 if __name__ == '__main__':
