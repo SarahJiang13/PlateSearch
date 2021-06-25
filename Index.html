@@ -11,7 +11,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-  
 
 <div class="jumbotron text-center">
   <h1>Plate Search</h1>
@@ -42,7 +41,15 @@
         
         $.ajax(setting).done(function(response){
           console.log(response);
+
+          var table = $("#platetable tbody");
+   var Plate= data[i].Plate
+   var Recievetimeutc  = data[i].Recievetimeutc;
+   var State = data[i].State;
+   $('#table tbody').append('<tr><td>'+Plate+'</td><td>'+Recievetimeutc+'</td><td>'+State+'</td></tr>')
+   
         });
+        
       })
 
 
@@ -71,7 +78,7 @@
   </div>
   
   <script>
-    
+  // Add the following code if you want the name of the file appear on select 
   $(".custom-file-input").on("change", function() {
     var fileName = $(this).val().split("\\").pop();
     $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
@@ -91,23 +98,24 @@
 <div class="container">
   <h2>All plate information</h2>
   <p>Deatils of the enter plate is as followed:</p>            
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-  
-    </tbody>
-  </table>
+ <table class="table">
+   <thead>
+     <tr>
+       <th scope="col">#</th>
+       <th scope="col">Plate</th>
+       <th scope="col">Recievetimeutc</th>
+       <th scope="col">State</th>
+       </tr>
+       <tbody>
+         <tr>
+           <th scope="row">1</th>
+          <td></td>
+          <td></td>
+          <td></td>
+         </tr>
+       </tbody>
+   </thead>
+ </table>
 </div>
 <script>
 $(document).ready(function() {
