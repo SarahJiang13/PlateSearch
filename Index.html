@@ -41,20 +41,16 @@
         
         $.ajax(setting).done(function(response){
           console.log(response);
-          sucess = function(data) {
-          $('#platetable').show();
+  
           for (var i = 0; i < len; i++) {
    var plate = data[i].plate;
    var date  = data[i].date;
    var state = data[i].state;
    $('#platetable tbody').append('<tr><td>'+plate+'</td><td>'+date+'</td><td>'+state+'</td></tr>')
 }
-        }
         });
         
       })
-
-
       </script>
   </form>
   </form>
