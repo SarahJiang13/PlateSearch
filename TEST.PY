@@ -51,6 +51,8 @@ def searchForState(row):
 
 @app.route('/plate', methods= (['POST']))
 def database():
+    # Open the CSV File
+    csvfile = open('rnp_counts.csv')
     # The request coming in from the server
     sarahsRequest = request.get_data()
     # Decoding the request
@@ -76,6 +78,8 @@ def database():
                 "Recievetimeutc": date,
                 "State": state,
             }
+    # Close the CSV File
+    csvfile.close()
     if jsonDict is not None:
         returnJson = json.dumps(jsonDict)
         content = get_file('index.html')
