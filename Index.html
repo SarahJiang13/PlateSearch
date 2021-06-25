@@ -43,11 +43,11 @@
           console.log(response);
 
           var table = $("#platetable tbody");
-   var Plate= data[i].Plate
-   var Recievetimeutc  = data[i].Recievetimeutc;
-   var State = data[i].State;
-   $('#table tbody').append('<tr><td>'+Plate+'</td><td>'+Recievetimeutc+'</td><td>'+State+'</td></tr>')
-   
+    $.each(data, function(idx, elem){
+        table.append("<tr><td>"+elem.Plate+"</td><td>"+elem.Recievetimeutc+"</td>   <td>"+elem.State+"</td></tr>");
+    });
+
+
         });
         
       })
@@ -91,11 +91,11 @@
 </div>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="Index.html">Search another plate</a>
+  <a class="navbar-brand" href="index.html">Search another plate</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"></button>
     <span class="navbar-toggler-icon"></span>
 </nav>
-<div class="container">
+<div class="container" id="platetable">
   <h2>All plate information</h2>
   <p>Deatils of the enter plate is as followed:</p>            
  <table class="table">
