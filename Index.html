@@ -38,18 +38,10 @@
             "plate": plate,
           }),
         };
-        
-        $.ajax(setting).done(function(response){
-          console.log(response);
-
-          var table = $("#platetable tbody");
+        var table = $("#platetable tbody");
     $.each(data, function(idx, elem){
-        table.append("<tr><td>"+elem.Plate+"</td><td>"+elem.Recievetimeutc+"</td>   <td>"+elem.State+"</td></tr>");
-    });
-
-
-        });
-        
+        table.append("<tr><td>"+elem.Plate+"</td><td>"+elem.Recievetimeutc+"</td><td>"+elem.State+"</td></tr>");
+    }); 
       })
 
 
@@ -102,9 +94,9 @@
    <thead>
      <tr>
        <th scope="col">#</th>
-       <th scope="col">Plate</th>
-       <th scope="col">Recievetimeutc</th>
-       <th scope="col">State</th>
+       <th scope="col"></th>
+       <th scope="col"></th>
+       <th scope="col"></th>
        </tr>
        <tbody>
          <tr>
