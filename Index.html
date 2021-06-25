@@ -41,8 +41,7 @@
         
         $.ajax(setting).done(function(response){
           console.log(response);
-        });
-        sucess = function(data) {
+          sucess = function(data) {
           $('#platetable').show();
           for (var i = 0; i < len; i++) {
    var plate = data[i].plate;
@@ -51,6 +50,7 @@
    $('#platetable tbody').append('<tr><td>'+plate+'</td><td>'+date+'</td><td>'+state+'</td></tr>')
 }
         }
+        });
         
       })
 
@@ -119,31 +119,6 @@
    </thead>
  </table>
 </div>
-<script>
-$(document).ready(function() {
-  $.ajax({
-        type: "GET",
-        url: "rnp_counts.csv",
-        success: function (data) {
-            $('body').append(arrayToTable(Papa.parse(data).data));
-        }
-    });
-
-    function arrayToTable(tableData) {
-        var table = $('<table></table>');
-        $(tableData).each(function (i, rowData) {
-            var row = $('<tr></tr>');
-            $(rowData).each(function (j, cellData) {
-                row.append($('<td>'+cellData+'</td>'));
-            });
-            table.append(row);
-        });
-        return table;
-    }
-});
-    
-</script>  
-
 <div class="jumbotron text-center" style="margin-bottom:0">
   <p>Plate search</p>
 </div>
