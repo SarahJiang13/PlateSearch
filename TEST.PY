@@ -9,6 +9,19 @@ app.config.from_object(__name__)
 csvfile = open('rnp_counts.csv')
 carPlate = range(1, 4)
 
+
+
+@app.route('/getPlate', methods= (['GET']))
+def getPlate():
+    testList = {
+            "Plate": "ABC123",
+            "Recievetimeutc": "25/06/2021",
+            "State": "NSW"
+        }
+    return testList
+
+    
+
 def root_dir(): 
     return os.path.abspath(os.path.dirname(__file__))
 
@@ -59,6 +72,8 @@ def database():
         "Recievetimeutc": date,
         "State": state,
     }
+
+
     
 
     for row in reader:
