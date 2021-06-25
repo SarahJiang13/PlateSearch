@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,25 +20,32 @@
 <div class="container mt-3">
 <form class="form-inline" action="/action_page.php">
     <input type="text" class="form-control col-lg-8" id="PlateSearch" placeholder="Search">
-    <form id="search-form" action="/search" method="POST">
-      <button class="btn btn-primary" type="button" onclick="loadDoc()">Search</button>
+      <button class="btn btn-primary" type="button" id="searchbutton">Search</button>
 
       <p id="demo"></p>
        
       <script>
-      function loadDoc() {
-        var xhttp = new XMLHttpRequest();
-        var plateToSearch = document.getElementById("PlateSearch").value;
-        xhttp.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("demo").innerHTML = this.responseText;
-          }
+      
+      $("#searchbutton").click(function(){
+        plate = document.getElementById("PlateSearch").value;
+        
+        var setting = {
+          "url": "/plate",
+          "method":"POST",
+          "headers":{
+            "Content-Type":"aplication/json"
+          },
+          data: JSON.stringify({
+            "plate": plate,
+          }),
         };
-        xhttp.open("POST", "/plate", true);
-        xhttp.setRequestHeader("Content-type", "text/json");
-        xhttp.send(plateToSearch);
-        console.log(plateToSearch)
-      }
+        
+        $.ajax(setting).done(function(response){
+          console.log(response);
+        });
+      })
+
+
       </script>
   </form>
   </form>
